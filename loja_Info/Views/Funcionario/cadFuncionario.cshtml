@@ -1,0 +1,62 @@
+﻿
+@model loja_Info.Models.modelFuncionario
+
+@{
+    ViewBag.Title = "Cadastro de Funcionário";
+}
+
+@using (Html.BeginForm("cadFuncionario", "Funcionario", FormMethod.Post))
+{
+    <label>Cadastro de Funcionário</label>
+    <br />
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.NomeFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.NomeFunc)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.RgFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.RgFunc)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.CelFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.CelFunc)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.CargoFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.CargoFunc)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.EndFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.EndFunc)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(m => m.TipoFunc)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.TipoFunc)
+    </div>
+
+
+    <br />
+    <input type="submit" value="Cadastrar" />
+}
+<br /><br />
+
+@ViewBag.confCadastro
+

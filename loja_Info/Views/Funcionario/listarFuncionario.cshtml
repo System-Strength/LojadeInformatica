@@ -1,0 +1,71 @@
+﻿
+@model IEnumerable<loja_Info.Models.modelFuncionario>
+
+@{
+    ViewBag.Title = "listarFuncionario";
+}
+
+<h2>Lista dos Funcionários</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CargoFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SenhaFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RgFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndFunc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CelFunc)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CargoFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SenhaFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RgFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndFunc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CelFunc)
+        </td>
+        <td>
+            @Html.ActionLink("Atualizar", "editarFuncionario", new { id = item.CodFunc }) |
+            @Html.ActionLink("Excluir", "excluirFuncionario", new { id = item.CodFunc }, new { onclick = "return confirm('Deseja realmente excluir?');" })
+        </td>
+    </tr>
+    }
+</table>

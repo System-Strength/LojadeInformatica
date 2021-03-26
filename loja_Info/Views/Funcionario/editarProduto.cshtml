@@ -1,0 +1,73 @@
+﻿@model loja_Info.Models.modelProduto
+
+@{
+    ViewBag.Title = "editarProduto";
+}
+
+<h2>Editar Produtos</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Editar Produto</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.cod_Prod)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nome_Prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nome_Prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nome_Prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.marca_Prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.marca_Prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.marca_Prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.categoria_Prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.categoria_Prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.categoria_Prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.valor_Prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.valor_Prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.valor_Prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.qtd_Prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.qtd_Prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.qtd_Prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "listarProduto")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

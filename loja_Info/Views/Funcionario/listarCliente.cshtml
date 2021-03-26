@@ -1,0 +1,58 @@
+﻿@model IEnumerable<loja_Info.Models.modelCliente>
+
+    @{
+    ViewBag.Title = "Listar Cliente";
+    }
+
+    <h2>listarClientes</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_Cli)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.nome_Cli)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.email_Cli)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_Cli)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.cel_Cli)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_Cli)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_Cli)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.email_Cli)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_Cli)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.cel_Cli)
+            </td>
+        </tr>
+    }
+
+    </table>

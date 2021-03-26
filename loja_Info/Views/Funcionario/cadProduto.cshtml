@@ -1,0 +1,59 @@
+﻿@model loja_Info.Models.modelProduto
+
+@{
+    ViewBag.Title = "cadCliente";
+}
+
+@using (Html.BeginForm("cadProduto", "Funcionario", FormMethod.Post))
+{
+
+<label>Cadastro de Produto</label>
+<br />
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.nome_Prod)
+</div>
+
+<div class="editor-field">
+    @Html.EditorFor(m => m.nome_Prod)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.marca_Prod)
+</div>
+
+<div class="editor-field">
+    @Html.EditorFor(m => m.marca_Prod)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.categoria_Prod)
+</div>
+
+<div class="editor-field">
+    @Html.EditorFor(m => m.categoria_Prod)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.valor_Prod) 
+</div>
+
+<div class="editor-field">
+    @Html.EditorFor(m => m.valor_Prod)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.qtd_Prod)
+</div>
+
+<div class="editor-field">
+    @Html.EditorFor(m => m.qtd_Prod)
+</div>
+
+<br />
+<input type="submit" value="Cadastrar" />
+}
+<br />
+<br />
+
+@ViewBag.confCadastro
