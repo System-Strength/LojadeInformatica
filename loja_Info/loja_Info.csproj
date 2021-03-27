@@ -128,6 +128,7 @@
     <Compile Include="Dados\acoesFuncionario.cs" />
     <Compile Include="Dados\acoesLogin.cs" />
     <Compile Include="Dados\acoesProduto.cs" />
+    <Compile Include="Dados\acoesVenda.cs" />
     <Compile Include="Dados\conexao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,6 +136,7 @@
     <Compile Include="Models\modelCliente.cs" />
     <Compile Include="Models\modelFuncionario.cs" />
     <Compile Include="Models\modelProduto.cs" />
+    <Compile Include="Models\modelVenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +146,18 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\icons\add-cliente_icon.png" />
+    <Content Include="fonts\icons\add-func_icon.png" />
+    <Content Include="fonts\icons\cube_icon.png" />
+    <Content Include="fonts\icons\home_icon.png" />
+    <Content Include="fonts\icons\log-out_icon.png" />
+    <Content Include="fonts\icons\shopping-cart_icon.png" />
+    <Content Include="fonts\sliders\Fone_slider.png" />
+    <Content Include="fonts\sliders\Keybord_slider.png" />
+    <Content Include="fonts\sliders\Memoria_slider.png" />
+    <Content Include="fonts\sliders\Mic_slider.png" />
+    <Content Include="fonts\sliders\Mouse_slider.png" />
+    <Content Include="fonts\sliders\Notebook_slider.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -175,15 +189,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Funcionario\cadFuncionario.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Funcionario\listarFuncionario.cshtml" />
     <Content Include="Views\Funcionario\cadCliente.cshtml" />
-    <Content Include="Views\Funcionario\editarFuncionario.cshtml" />
     <Content Include="Views\Funcionario\listarCliente.cshtml" />
     <Content Include="Views\Funcionario\excluirFuncionario.cshtml" />
     <Content Include="Views\Funcionario\cadProduto.cshtml" />
-    <Content Include="Views\Funcionario\listarProduto.cshtml" />
     <Content Include="Views\Funcionario\excluirProduto.cshtml" />
+    <Content Include="Views\Funcionario\listarProduto.cshtml" />
+    <Content Include="Views\Funcionario\editarFuncionario.cshtml" />
+    <Content Include="Views\Funcionario\listarFuncionario.cshtml" />
     <Content Include="Views\Funcionario\editarProduto.cshtml" />
+    <Content Include="Views\Funcionario\Venda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

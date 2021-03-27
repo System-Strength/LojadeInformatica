@@ -1,60 +1,74 @@
 ﻿
 @model IEnumerable<loja_Info.Models.modelProduto>
 
-@{
-    ViewBag.Title = "listarProduto";
-}
-
-<h2>Lista dos Produtos</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_Prod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nome_Prod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.marca_Prod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categoria_Prod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valor_Prod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.qtd_Prod)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cod_Prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome_Prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.marca_Prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria_Prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.valor_Prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qtd_Prod)
-        </td>
-        <td>
-            @Html.ActionLink("Atualizar", "editarProduto", new { id = item.cod_Prod }) |
-            @Html.ActionLink("Excluir", "excluirProduto", new { id = item.cod_Prod }, new { onclick = "return confirm('Deseja realmente excluir?');" })
-        </td>
-    </tr>
+    @{
+    ViewBag.Title = "listarProdutos";
     }
-</table>
 
+    <h2>listarProdutos</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_Prod )
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.nome_Prod)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.marca_Prod)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.categoria_Prod)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.valor_Prod)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.qtd_Prod)
+            </th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_Prod)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_Prod)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.marca_Prod)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.categoria_Prod)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_Prod)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.qtd_Prod)
+            </td>
+
+            <td>
+                @Html.ActionLink("Atualizar", "editarProduto", new { id = item.cod_Prod }) |
+                @Html.ActionLink("Excluir", "excluirProduto", new { id = item.cod_Prod }, new { onclick = "return confirm('Deseja realmente excluir?');" })
+            </td>
+        </tr>
+        }
+    </table>
+
+    @Html.ActionLink("Cadastrar Produto", "cadProduto");

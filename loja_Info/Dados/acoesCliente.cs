@@ -12,6 +12,7 @@ namespace loja_Info.Dados
     {
         conexao con = new conexao();
 
+        //  Ao inicializar esse método e ter sido informado dados primários do usuário será feito a inserção do cliente no banco de dados
         public void inserirCliente(modelCliente cm)
         {
             MySqlCommand cmd = new MySqlCommand("insert into tbl_Cliente (nome_Cli, email_Cli, endereco_Cli, cel_Cli )values(@nome_Cli, @email_Cli, @endereco_Cli, @cel_Cli)", con.MyConectarBD());
@@ -23,10 +24,13 @@ namespace loja_Info.Dados
             cmd.ExecuteNonQuery();
             con.MyDesconectarBD();
         }
+        //  Método para busca de cliente
         public List<modelCliente> BuscarCliente()
         {
+            //  Criando uma lista de cliente para armazenar as informações recebida do banco dados
             List<modelCliente> Clilist = new List<modelCliente>();
 
+            //  Realizando consulta ao banco de dados
             MySqlCommand cmd = new MySqlCommand("select * from tbl_Cliente", con.MyConectarBD());
             MySqlDataAdapter sd = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -34,6 +38,7 @@ namespace loja_Info.Dados
             sd.Fill(dt);
             con.MyDesconectarBD();
 
+            //  Adicionando os dados recebido na lista de cliente
             foreach (DataRow dr in dt.Rows)
             {
                 Clilist.Add(

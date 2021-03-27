@@ -8,38 +8,40 @@ namespace loja_Info.Dados
 {
     public class conexao
     {
+        //  Estabelecendo informações para conexão ao banco de dados
         MySqlConnection cn = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789");
         public static string msg;
 
+        //  Método para conectar ao banco de dados
         public MySqlConnection MyConectarBD()
         {
-
             try
             {
                 cn.Open();
             }
 
-            catch (Exception erro)
+            catch (Exception ex)
             {
-                msg = "Ocorreu um erro ao se conectar" + erro.Message;
+                msg = "Ocorreu um erro ao se conectar: " + ex.Message;
+                System.Diagnostics.Debug.WriteLine(msg);
             }
             return cn;
         }
 
+        //  Método para fechar conexão ao banco de dados
         public MySqlConnection MyDesconectarBD()
         {
-
             try
             {
                 cn.Close();
             }
 
-            catch (Exception erro)
+            catch (Exception ex)
             {
-                msg = "Ocorreu um erro ao se conectar" + erro.Message;
+                msg = "Ocorreu um erro ao se conectar: " + ex.Message;
+                System.Diagnostics.Debug.WriteLine(msg);
             }
             return cn;
         }
-
     }
 }

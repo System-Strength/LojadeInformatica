@@ -12,14 +12,15 @@ namespace loja_Info.Dados
     {
         conexao con = new conexao();
 
-        //MÉTODO PARA INSERIR FUNCIONÁRIO
+        //  MÉTODO PARA INSERIR FUNCIONÁRIO
         public void inserirFuncionario(modelFuncionario funcionario)
         {
             MySqlCommand cmd = new MySqlCommand("insert into tbl_Funcionario (nome_Func, cel_Func, endereco_Func, cargo_Func, rg_Func, senha_Func, tipo_Func) values(@NomeFunc, @CelFunc, @EndFunc, @CargoFunc, @RgFunc, @SenhaFunc, @TipoFunc)", con.MyConectarBD());
 
             //  Mecanismo para geração da senha do funcionario
             Random rnd = new Random();
-            int senhaNum = rnd.Next(1001, 20000);
+            int senhaNum = rnd.Next(10, 49);
+            //  Armazenando senha gerada e inserindo diferencial "FUNC"
             String senha_gerada = "func" + senhaNum;
 
             cmd.Parameters.Add("@NomeFunc", MySqlDbType.VarChar).Value = funcionario.NomeFunc;
@@ -34,10 +35,13 @@ namespace loja_Info.Dados
             con.MyDesconectarBD();
         }
 
+        //  Método para buscar informações de um funcionário
         public List<modelFuncionario> BuscarFuncionario()
         {
+            //  Criando uma lista de funcionário para armazenar as informações recebida do banco de dados
             List<modelFuncionario> Funlist = new List<modelFuncionario>();
 
+            //  Realizando consulta ao banco de dados
             MySqlCommand cmd = new MySqlCommand("select * from tbl_Funcionario", con.MyConectarBD());
             MySqlDataAdapter sd = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -45,6 +49,7 @@ namespace loja_Info.Dados
             sd.Fill(dt);
             con.MyDesconectarBD();
 
+            //  Adicionando os dados recebido na lista de funcionário
             foreach (DataRow dr in dt.Rows)
             {
                 Funlist.Add(
@@ -57,38 +62,44 @@ namespace loja_Info.Dados
                         EndFunc = Convert.ToString(dr["endereco_Func"]),
                         CelFunc = Convert.ToString(dr["cel_Func"]),
                         SenhaFunc = Convert.ToString(dr["senha_Func"]),
-                        TipoFunc = Convert.ToString(dr["tipo_Func"]),
+                        TipoFunc = Convert.ToString(dr["tipo_Func"])
                     });
             }
             return Funlist;
         }
 
-        public bool atualizaFuncionario(modelFuncionario funcionario)
+        //  Método para editar um funcionário
+        public bool editarFuncionario(modelFuncionario smodel)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbl_Funcionario set nome_Func=@NomeFunc, cel_Func=@CelFunc, endereco_Func=@EndFunc, cargo_Func=@CargoFunc, rg_Func=@RgFunc, senha_Func=@SenhaFunc and tipo_Func=@TipoFunc where cod_Func=@CodFunc", con.MyConectarBD());
+            //  Realizando update do funcionário no banco de dados
+            MySqlCommand cmd = new MySqlCommand("update tbl_Funcionario set nome_Func=@nome_Func, cel_Func=@cel_Func, endereco_Func=@endereco_Func, cargo_Func=@cargo_Func, rg_Func=@rg_Func, senha_Func=@senha_Func, tipo_Func=@tipo_Func where cod_Func=@cod_Func", con.MyConectarBD());
 
-            cmd.Parameters.AddWithValue("@NomeFunc", funcionario.NomeFunc);
-            cmd.Parameters.AddWithValue("@CelFunc", funcionario.CelFunc);
-            cmd.Parameters.AddWithValue("@EndFunc", funcionario.EndFunc);
-            cmd.Parameters.AddWithValue("@CargoFunc", funcionario.CargoFunc);
-            cmd.Parameters.AddWithValue("@RgFunc", funcionario.RgFunc);
-            cmd.Parameters.AddWithValue("@SenhaFunc", funcionario.SenhaFunc);
-            cmd.Parameters.AddWithValue("@TipoFunc", funcionario.TipoFunc);
-            cmd.Parameters.AddWithValue("@CodFunc", funcionario.CodFunc);
+            cmd.Parameters.AddWithValue("@cod_Func", smodel.CodFunc);
+            cmd.Parameters.AddWithValue("@nome_Func", smodel.NomeFunc);
+            cmd.Parameters.AddWithValue("@cel_Func", smodel.CelFunc);
+            cmd.Parameters.AddWithValue("@endereco_Func", smodel.EndFunc);
+            cmd.Parameters.AddWithValue("@cargo_Func", smodel.CargoFunc);
+            cmd.Parameters.AddWithValue("@rg_Func", smodel.RgFunc);
+            cmd.Parameters.AddWithValue("@senha_Func", smodel.SenhaFunc);
+            cmd.Parameters.AddWithValue("@tipo_Func", smodel.TipoFunc);
 
             int i = cmd.ExecuteNonQuery();
             con.MyDesconectarBD();
 
             if (i >= 1)
+            {
                 return true;
-
+            }
             else
+            {
                 return false;
-
+            }
         }
 
+        //  Método para deleter um funcionário
         public bool DeleteFuncionario(int id)
         {
+            //  Deletando funcionário do banco de dados
             MySqlCommand cmd = new MySqlCommand("delete from tbl_Funcionario where cod_Func=@CodFunc", con.MyConectarBD());
 
             cmd.Parameters.AddWithValue("@CodFunc", id);

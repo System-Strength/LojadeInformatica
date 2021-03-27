@@ -12,6 +12,7 @@ namespace loja_Info.Dados
     {
         conexao con = new conexao();
 
+        //  MÉTODO PARA INSERIR PRODUTO
         public void inserirProduto(modelProduto produto)
         {
 
@@ -27,10 +28,13 @@ namespace loja_Info.Dados
             con.MyDesconectarBD();
         }
 
+        //  Método para buscar informações de um produtos
         public List<modelProduto> BuscarProduto()
         {
+            //  Criando uma lista de produtos para armazenar as informações recebida do banco de dados
             List<modelProduto> Prodlist = new List<modelProduto>();
 
+            //  Realizando consulta ao banco de dados
             MySqlCommand cmd = new MySqlCommand("select * from tbl_Produto", con.MyConectarBD());
             MySqlDataAdapter sd = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -38,6 +42,7 @@ namespace loja_Info.Dados
             sd.Fill(dt);
             con.MyDesconectarBD();
 
+            //  Adicionando os dados recebido na lista de produtos
             foreach (DataRow dr in dt.Rows)
             {
                 Prodlist.Add(
@@ -48,32 +53,38 @@ namespace loja_Info.Dados
                         marca_Prod = Convert.ToString(dr["marca_Prod"]),
                         categoria_Prod = Convert.ToString(dr["categoria_Prod"]),
                         valor_Prod = Convert.ToString(dr["valor_Prod"]),
-                        qtd_Prod = Convert.ToString(dr["qtd_Prod"]),
+                        qtd_Prod = Convert.ToString(dr["qtd_Prod"])
                     });
             }
             return Prodlist;
         }
 
-        public bool atualizaProduto(modelProduto produto)
+        //  Método para editar um produto
+        public bool editarProduto(modelProduto produto)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbl_Produto set nome_Prod=@nome_Prod, marca_Prod=@marca_Prod, qtd_Prod=@qtd_Prod, valor_Prod=@valor_Prod and categoria_Prod=@categoria_Prod where cod_Prod=@cod_Prod", con.MyConectarBD());
+            //  Realizando update do produto no banco de dados
+            MySqlCommand cmd = new MySqlCommand("update tbl_Produto set nome_Prod=@nome_Prod, marca_Prod=@marca_Prod, categoria_Prod=@categoria_Prod, valor_Prod=@valor_Prod, qtd_Prod=@qtd_Prod where cod_Prod=@cod_Prod", con.MyConectarBD());
 
             cmd.Parameters.AddWithValue("@nome_Prod", produto.nome_Prod);
             cmd.Parameters.AddWithValue("@marca_Prod", produto.marca_Prod);
-            cmd.Parameters.AddWithValue("@qtd_Prod", produto.qtd_Prod);
-            cmd.Parameters.AddWithValue("@valor_Prod", produto.valor_Prod);
             cmd.Parameters.AddWithValue("@categoria_Prod", produto.categoria_Prod);
+            cmd.Parameters.AddWithValue("@valor_Prod", produto.valor_Prod);
+            cmd.Parameters.AddWithValue("@qtd_Prod", produto.qtd_Prod);
             cmd.Parameters.AddWithValue("@cod_Prod", produto.cod_Prod);
+
 
             int i = cmd.ExecuteNonQuery();
             con.MyDesconectarBD();
 
             if (i >= 1)
                 return true;
+
             else
                 return false;
+
         }
 
+        //  Método para deleter um produto
         public bool DeleteProduto(int id)
         {
             MySqlCommand cmd = new MySqlCommand("delete from tbl_Produto where cod_Prod=@CodProd", con.MyConectarBD());
