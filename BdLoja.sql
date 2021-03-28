@@ -3,6 +3,7 @@ CREATE DATABASE BDLOJA
 default character set utf8
 default collate utf8_general_ci;
 
+
 /*Usando o banco de dados */
 USE BDLOJA;
 
@@ -43,13 +44,36 @@ forma_Pagamento varchar(50) not null
 
 CREATE TABLE tbl_Vendas(
 cod_Vendas int primary key auto_increment,
-nome_Cli varchar(50) not null references tbl_Cliente(nome_Cli),
+cod_Cli int not null references tbl_Cliente(cod_Cli),
 endereco_Cli varchar(50) not null references tbl_Cliente(endereco_Cli),
 cel_Cli varchar(11) not null references tbl_Cliente(cel_Cli),
-nome_Prod varchar(50) not null references tbl_Produto(nome_Prod),
-qtd_Prod int not null references tbl_Produto(qtd_Prod),
-forma_Pagamento varchar(50) not null references tbl_Pagamento(forma_Pagamento)
+cod_Prod int not null references tbl_Produto(cod_Prod),
+qtd_Prod int not null ,
+cod_Pagamento int not null references tbl_Pagamento(cod_Pagamento)
 );
+
+
+drop table tbl_Vendas;
+
+select tbl_Vendas.cod_Vendas, tbl_Cliente.nome_Cli, tbl_Cliente.endereco_Cli, tbl_Cliente.cel_Cli,
+tbl_Produto.nome_Prod, tbl_Produto.qtd_Prod, tbl_Pagamento.forma_Pagamento from tbl_Vendas, tbl_Cliente, tbl_Produto, tbl_Pagamento 
+where tbl_Vendas.cod_Cli = tbl_Cliente.cod_Cli and tbl_Vendas.cod_Prod = tbl_Produto.cod_Prod and tbl_Vendas.cod_Pagamento = tbl_Pagamento.cod_Pagamento ;
+
+select tbl_Vendas.cod_Vendas, tbl_Cliente.nome_Cli, tbl_Cliente.endereco_Cli, tbl_Cliente.cel_Cli,
+tbl_Produto.nome_Prod, tbl_Produto.qtd_Prod, tbl_Pagamento.forma_Pagamento from tbl_Vendas, tbl_Cliente, tbl_Produto, tbl_Pagamento
+where tbl_Vendas.cod_Cli = tbl_Cliente.cod_Cli and tbl_Vendas.cod_Prod = tbl_Produto.cod_Prod and tbl_Vendas.cod_Pagamento = tbl_Pagamento.cod_Pagamento;
+
+
+
+select tbl_Produto.nome_Prod, tbl_Produto.qtd_Prod from tbl_Vendas, tbl_Produto 
+where tbl_Vendas.cod_Prod = tbl_Produto.cod_Prod;
+
+select * from tbl_Vendas;
+
+select * from tbl_Produto;
+
+select * from tbl_funcionario;
+
 
 /*Inserindo dados nas tables */
 
@@ -60,7 +84,7 @@ insert into tbl_Funcionario (nome_Func, cel_Func, endereco_Func, cargo_Func, rg_
 
 insert into tbl_Funcionario (nome_Func, cel_Func, endereco_Func, cargo_Func, rg_Func, senha_Func, tipo_Func) values ('Matheus Souza','11925469887','Rua São João N°6','Gerente', 22222222222, "1234567", 1);
 
-select * from tbl_funcionario;
+insert into tbl_Produto (nome_Prod, marca_Prod, categoria_Prod, valor_Prod, qtd_Prod) values("Teclado Dell", "Dell", "Teclado", "199.00", "300");
 
 drop database bdloja;
 

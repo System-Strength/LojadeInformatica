@@ -151,7 +151,9 @@
     <Content Include="fonts\icons\cube_icon.png" />
     <Content Include="fonts\icons\home_icon.png" />
     <Content Include="fonts\icons\log-out_icon.png" />
+    <Content Include="fonts\icons\padlock.png" />
     <Content Include="fonts\icons\shopping-cart_icon.png" />
+    <Content Include="fonts\icons\user.png" />
     <Content Include="fonts\sliders\Fone_slider.png" />
     <Content Include="fonts\sliders\Keybord_slider.png" />
     <Content Include="fonts\sliders\Memoria_slider.png" />
@@ -184,8 +186,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Funcionario\cadFuncionario.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -199,6 +199,7 @@
     <Content Include="Views\Funcionario\listarFuncionario.cshtml" />
     <Content Include="Views\Funcionario\editarProduto.cshtml" />
     <Content Include="Views\Funcionario\Venda.cshtml" />
+    <Content Include="Views\Funcionario\listarVendas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

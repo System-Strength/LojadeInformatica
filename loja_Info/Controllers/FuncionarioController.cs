@@ -12,22 +12,18 @@ namespace loja_Info.Controllers
     public class FuncionarioController : Controller
     {
         // GET: Funcionario
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         acoesFuncionario acFun = new acoesFuncionario();
 
-        public ActionResult cadFuncionario()
+        public ActionResult cadFuncionario() //VIEW DO CADASTRAMENTO DO FUNCIONÁRIO
         {
-            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
-            else if (Session["tipoLogado1"] != null)
+            else if (Session["tipoLogado1"] != null)//O FUNCIONÁRIO NÃO CONSEGUE CADASTRAR OUTRO FUNCIONÁRIO
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");//ENTÃO ELE SERÁ REDIRECIONADA PARA A HOME
             }
             else
             {
@@ -36,39 +32,38 @@ namespace loja_Info.Controllers
         }
 
         [HttpPost]
-        public ActionResult cadFuncionario(modelFuncionario fun)
+        public ActionResult cadFuncionario(modelFuncionario fun) //FAZ O INSERT DO FUNCIONÁRIO
         {
             acFun.inserirFuncionario(fun);
-            ViewBag.confCadastro = "Cadastro Realizado com sucesso";
-            return View();
+            return RedirectToAction("listarFuncionario");
         }
 
-        public ActionResult listarFuncionario()
+        public ActionResult listarFuncionario() // LISTA DO FUNCIONÁRIO
         {
-            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
-            else if (Session["tipoLogado1"] != null)
+            else if (Session["tipoLogado1"] != null)//O FUNCIONÁRIO NÃO CONSEGUE VER OUTROS FUNCIONÁRIOS
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");//ENTÃO ELE SERÁ REDIRECIONADA PARA A HOME
             }
             else
             {
                 ModelState.Clear();
-                return View(acFun.BuscarFuncionario());
+                return View(acFun.BuscarFuncionario());//CASO SEJA GERENTE O USUÁRIO LOGADO, ELE IRÁ BUSCAR O FUNCIONÁRIO
             }
         }
 
-        public ActionResult editarFuncionario(string id)
+        public ActionResult editarFuncionario(string id) // VIEW PARAR EDITAR FUNCIONÁRIO
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
-            else if (Session["tipoLogado1"] != null)
+            else if (Session["tipoLogado1"] != null)//O FUNCIONÁRIO NÃO CONSEGUE EDITAR OUTROS FUNCIONÁRIOS
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");//ENTÃO ELE SERÁ REDIRECIONADA PARA A HOME
             }
             else
             {
@@ -78,50 +73,50 @@ namespace loja_Info.Controllers
         }
 
         [HttpPost]
-        public ActionResult editarFuncionario(int id, modelFuncionario smodel)
+        public ActionResult editarFuncionario(int id, modelFuncionario smodel) // FAZ O UPDATE DO FUNCIONÁRIO
         {
-            try
+            try //TENTA EDITAR FUNCIONÁRIO
             {
                 acoesFuncionario sdb = new acoesFuncionario();
                 sdb.editarFuncionario(smodel);
                 return RedirectToAction("listarFuncionario");
             }
-            catch (Exception ex)
+            catch (Exception ex)//CASO NÃO CONSIGA ELE DARÁ UM ERRO NO NOSSO LOG
             {
                 System.Diagnostics.Debug.WriteLine("Deu um erro aqui: " + ex);
                 return RedirectToAction("listarFuncionario");
             }
         }
 
-        public ActionResult excluirFuncionario(int id, modelFuncionario fun)
+        public ActionResult excluirFuncionario(int id, modelFuncionario fun) //VIEW PARA EXCLUIR O FUNCIONÁRIO
         {
-            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null && Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
-            else if (Session["tipoLogado1"] != null)
+            else if (Session["tipoLogado1"] != null)//O FUNCIONÁRIO NÃO CONSEGUE EXCLUIR OUTROS FUNCIONÁRIOS
             {
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                try
+                try //TENTA EXCLUIR FUNCIONÁRIO
                 {
                     acoesFuncionario sdb = new acoesFuncionario();
 
-                    if (sdb.DeleteFuncionario(id))
+                    if (sdb.DeleteFuncionario(id))//SE ACHAR O CÓDIGO DO FUNCIONÁRIO IRÁ EXCLUIR
                     {
                         ViewBag.AlertMsg = "Funcionário excluído com sucesso";
                     }
                     return RedirectToAction("listarFuncionario");
                 }
 
-                catch
+                catch//CASO NÃO CONSIGA ELE IRÁ RECARREGAR A PÁGINA
                 {
                     return View();
                 }
             }
-            
+
         }
 
 
@@ -129,9 +124,9 @@ namespace loja_Info.Controllers
 
         acoesCliente acCli = new acoesCliente();
 
-        public ActionResult cadCliente()
+        public ActionResult cadCliente() //VIEW PARA CADASTRAR O CLIENTE
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -142,16 +137,15 @@ namespace loja_Info.Controllers
         }
 
         [HttpPost]
-        public ActionResult cadCliente(modelCliente cli)
+        public ActionResult cadCliente(modelCliente cli) //FAZ O INSERT DO CLIENTE
         {
             acCli.inserirCliente(cli);
-            ViewBag.confCadastro = "Cadastro Realizado com sucesso";
-            return View();
+            return RedirectToAction("listarCliente");
         }
 
-        public ActionResult listarCliente()
+        public ActionResult listarCliente() //LISTA TODOS OS CLIENTES
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -166,9 +160,9 @@ namespace loja_Info.Controllers
 
         acoesProduto acProd = new acoesProduto();
 
-        public ActionResult cadProduto()
+        public ActionResult cadProduto() //VIEW PARA CADASTRAR O PRODUTO
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -179,23 +173,30 @@ namespace loja_Info.Controllers
         }
 
         [HttpPost]
-        public ActionResult cadProduto(modelProduto produto)
+        public ActionResult cadProduto(modelProduto produto) //FAZ O INSERT DO PRODUTO
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-                acProd.inserirProduto(produto);
-                ViewBag.confCadastro = "Cadastro Realizado com sucesso";
-                return View();
+                try
+                {
+                    acProd.inserirProduto(produto);
+                    return RedirectToAction("listarProduto");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Deu um erro aqui: " + ex);
+                    return View();
+                }
             }
         }
 
-        public ActionResult listarProduto(modelProduto produto)
+        public ActionResult listarProduto() // VIEW DA LISTA DOS PRODUTOS 
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -206,20 +207,20 @@ namespace loja_Info.Controllers
             }
         }
 
-        public ActionResult editarProduto(string id)
+        public ActionResult editarProduto(string id) // VIEW PARA EDITAR OS PRODUTOS
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-                return View(acProd.BuscarProduto().Find(produto => produto.cod_Prod == id)); 
+                return View(acProd.BuscarProduto().Find(produto => produto.cod_Prod == id));
             }
         }
 
         [HttpPost]
-        public ActionResult editarProduto(modelProduto produto)
+        public ActionResult editarProduto(modelProduto produto) //FAZ O UPDATE DOS PRODUTOS
         {
             try
             {
@@ -227,16 +228,16 @@ namespace loja_Info.Controllers
                 sdb.editarProduto(produto);
                 return RedirectToAction("listarProduto");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Deu um erro aqui: " + ex);
                 return View();
             }
         }
 
-        public ActionResult excluirProduto(int id, modelProduto produto)
+        public ActionResult excluirProduto(int id, modelProduto produto) // VIEW PARA EXCLUIR OS PRODUTOS
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)//SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -257,121 +258,123 @@ namespace loja_Info.Controllers
                     return View();
                 }
             }
-            //ABAIXO SÃO CÓDIGOS RELACIONADOS A VENDA
+        }
 
-            acoesVenda acoesVenda = new acoesVenda();
+        //ABAIXO SÃO CÓDIGOS RELACIONADOS A VENDA
+        acoesVenda acoesVenda = new acoesVenda();
 
-            public void carregaCliente()
+        public void carregaCliente() // TRAZ OS CLIENTES NA DROPLIST
+        {
+            List<SelectListItem> cli = new List<SelectListItem>();
+
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
             {
-                List<SelectListItem> cli = new List<SelectListItem>();
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbl_Cliente order by nome_Cli;", con);
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
-                using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
+                while (rdr.Read())
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select * from tbl_Cliente order by nome_Cli;", con);
-                    MySqlDataReader rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
+                    cli.Add(new SelectListItem
                     {
-                        cli.Add(new SelectListItem
-                        {
-                            Text = rdr[1].ToString(),
-                            Value = rdr[0].ToString()
-                        });
-                    }
+                        Text = rdr[1].ToString(),
+                        Value = rdr[0].ToString()
+                    });
 
-                    con.Close();
-                    con.Open();
                 }
 
-                ViewBag.cliente = new SelectList(cli, "Value", "Text");
+                con.Close();
+                con.Open();
             }
-            public void carregaProduto()
+
+            ViewBag.cliente = new SelectList(cli, "Value", "Text");
+        }
+        public void carregaProduto() // TRAZ OS PRODUTOS NA DROPLIST
+        {
+            List<SelectListItem> prod = new List<SelectListItem>();
+
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
             {
-                List<SelectListItem> prod = new List<SelectListItem>();
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbl_Produto order by nome_Prod;", con);
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
-                using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
+                while (rdr.Read())
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select * from tbl_Produto order by nome_Prod;", con);
-                    MySqlDataReader rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
+                    prod.Add(new SelectListItem
                     {
-                        prod.Add(new SelectListItem
-                        {
-                            Text = rdr[1].ToString(),
-                            Value = rdr[0].ToString()
-                        });
-                    }
-
-                    con.Close();
-                    con.Open();
+                        Text = rdr[1].ToString(),
+                        Value = rdr[0].ToString()
+                    });
                 }
 
-                ViewBag.produto = new SelectList(prod, "Value", "Text");
+                con.Close();
+                con.Open();
             }
-            public void carregaFormaPag()
+
+            ViewBag.produto = new SelectList(prod, "Value", "Text");
+        }
+        public void carregaFormaPag() //CARREGA AS FORMAS DE PAGAMENTO NA DROPLIST
+        {
+            List<SelectListItem> pag = new List<SelectListItem>();
+
+            using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
             {
-                List<SelectListItem> pag = new List<SelectListItem>();
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbl_Pagamento order by forma_Pagamento;", con);
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
-                using (MySqlConnection con = new MySqlConnection("Server=localhost;DataBase=bdloja;User=root;pwd=123456789"))
+                while (rdr.Read())
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select * from tbl_Pagamento order by forma_Pagamento;", con);
-                    MySqlDataReader rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
+                    pag.Add(new SelectListItem
                     {
-                        pag.Add(new SelectListItem
-                        {
-                            Text = rdr[1].ToString(),
-                            Value = rdr[0].ToString()
-                        });
-                    }
-
-                    con.Close();
-                    con.Open();
+                        Text = rdr[1].ToString(),
+                        Value = rdr[0].ToString()
+                    });
                 }
 
-                ViewBag.pagamento = new SelectList(pag, "Value", "Text");
+                con.Close();
+                con.Open();
             }
-            public ActionResult Venda()
+
+            ViewBag.pagamento = new SelectList(pag, "Value", "Text");
+        }
+        public ActionResult Venda() // VIEW DA VENDA
+        {
+            carregaCliente();
+            carregaProduto();
+            carregaFormaPag();
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Venda(modelVenda venda) //REALIZA A VENDA
+        {
+            carregaCliente();
+            carregaProduto();
+            carregaFormaPag();
+            venda.cod_Cliente = Request["cliente"];
+            venda.cod_Produto = Request["produto"];
+            venda.cod_Pagamento = Request["pagamento"];
+            if (venda.qtd_Prod != null//SE A QUANTIDADE DO PRODUTO NÃO ESTIVER NULO, REALIZA A VENDA
             {
-                carregaCliente();
-                carregaProduto();
-                carregaFormaPag();
+                acoesVenda.inserirVenda(venda);
+                ViewBag.msg = "Venda Realizada";
+                return RedirectToAction("listarVendas");
+            }
+            else//SE A QUANTIDADE DO PRODUTO ESTIVER NULA, NÃO REALIZA A VENDA
+            {
+                ViewBag.msg = "Produto indisponível";
                 return View();
             }
 
-
-            [HttpPost]
-            public ActionResult Venda(modelVenda venda)
-            {
-                carregaCliente();
-                carregaProduto();
-                carregaFormaPag();
-                venda.cod_Cliente = Request["cliente"];
-                venda.cod_Produto = Request["produto"];
-                venda.forma_Pagamento = Request["pagamento"];
-                ac.TestarAgenda(venda);
-
-                if (venda.confAgendamento == "1")
-                {
-                    ac.inserirAtendimento(venda);
-                    ViewBag.msg = "Agendamento Realizado";
-                    return View();
-                }
-
-                else if (venda.confAgendamento == "0")
-                {
-                    ViewBag.msg = "Horário indisponível";
-                    return View();
-                }
-
-                return View();
-
-            }
+        }
+        public ActionResult listarVendas() //LISTA AS VENDAS FEITAS
+        {
+            acoesVenda dbhandle = new acoesVenda();
+            ModelState.Clear();
+            return View(dbhandle.GetVendaCons());
         }
     }
 }

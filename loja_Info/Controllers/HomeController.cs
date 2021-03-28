@@ -8,31 +8,16 @@ namespace loja_Info.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() // VIEW DA HOME
         {
-            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null)
+            if (Session["usuarioLogado"] == null || Session["senhaLogado"] == null) //SÓ IRÁ LOGAR SE OS CAMPOS ESTIVEREM PREENCHIDOS
             {
                 return RedirectToAction("Login", "Login");
             }
-            else
+            else //RECARREGARÁ A PÁGINA
             {
                 return View();
             }
-
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

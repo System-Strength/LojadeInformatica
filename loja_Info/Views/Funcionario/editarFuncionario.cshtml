@@ -1,91 +1,194 @@
 ﻿@model loja_Info.Models.modelFuncionario
 
-@{
-    ViewBag.Title = "editarFuncionario";
+@{ ViewBag.Title = "editarFuncionario";
+    Layout = null;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
 }
 
-<h2>editarFuncionario</h2>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins';
+    }
 
-@using (Html.BeginForm())
-{
+    :root {
+        --white: #F6F6F6;
+        --back-first: #e9e9e9;
+        --text: #333333;
+        --buttonEdit: #47CCFD;
+    }
+
+    body {
+        min-height: 100vh;
+        background-color: var(--back-first);
+        transition: 2s;
+    }
+
+    nav {
+        margin: 4% 4%;
+        z-index: 6000;
+        position: fixed;
+        width: 80px;
+        height: 85%;
+        border-radius: 50px;
+        background: var(--white);
+        transition: 0.5s;
+        text-align: center;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+        ul .home, .log-out {
+            margin: 2.5rem auto;
+        }
+
+    li img {
+        width: 2.5rem;
+        margin: 0.5rem auto;
+        transition: 0.5s;
+    }
+
+    a li img:hover {
+        width: 3rem;
+        transition: ease-in-out 0.5s;
+    }
+
+    section {
+        display: inline-flex;
+        background-color: var(--white);
+        width: 65%;
+        height: 78vh;
+        margin: 5% 16%;
+        justify-content: center;
+        border: solid 2px var(--text);
+    }
+
+        section h1 {
+            font: bold 22pt Poppins;
+            margin: 5% 25%;
+            letter-spacing: 3px;
+            color: var(--text);
+        }
+
+        section .campo {
+            width: 25vw;
+            padding: 10px;
+            margin: 1.5em 1em;
+        }
+
+    .campo::placeholder {
+        color: #707070;
+        font: italic 14pt Poppins;
+        margin: 10% auto;
+        opacity: 50%;
+    }
+
+    .main {
+        display: flex;
+        margin: 1em;
+    }
+
+    section .buttonEdit {
+        cursor: pointer;
+        width: 30%;
+        padding: 10px;
+        margin-left: 17%;
+        border: none;
+        font: bold 12pt Poppins;
+        text-transform: uppercase;
+        border-radius: 25px;
+        background: var(--buttonEdit);
+        color: var(--white);
+    }
+
+    .footer {
+        display: flex;
+        margin: auto 0%;
+        width: 110%;
+    }
+
+    .back {
+        display: inline-flex;
+    }
+</style>
+<nav>
+    <ul>
+        <a href="" title="Home"><li class="home"><img src="~/fonts/icons/home_icon.png" alt=""></li></a>
+        @if (Session["tipoLogado1"] == null)
+        {
+            <a href="../Funcionario/cadFuncionario" title="Cadastrar Funcionário"><li><img src="~/fonts/icons/add-func_icon.png" alt=""></li></a>
+        }
+        <a href="../Funcionario/cadCliente" title="Cadastrar Cliente"><li><img src="~/fonts/icons/add-cliente_icon.png" alt=""></li></a>
+        <a href="../Funcionario/cadProduto" title="Produtos"><li><img src="~/fonts/icons/cube_icon.png" alt=""></li></a>
+        <a href="../Funcionario/Venda" title="Carrinho"><li><img src="~/fonts/icons/shopping-cart_icon.png" alt=""></li></a>
+        <a href="../Login/Login" title="Sair"><li class="log-out"><img src="~/fonts/icons/log-out_icon.png" alt=""></li></a>
+    </ul>
+</nav>
+<section>
+    @using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>modelFuncionario</h4>
-        <hr />
+    <h1>EDITAR FUNCIONÁRIO</h1>
+    <main class="main">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CodFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CodFunc, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <main class="main_one">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NomeFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NomeFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NomeFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.NomeFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RgFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RgFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RgFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RgFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.RgFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CargoFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CargoFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CargoFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CargoFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.CargoFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndFunc, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </main>
+        <main class="two_main">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CelFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CelFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CelFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.EndFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SenhaFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SenhaFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SenhaFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CelFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.CelFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TipoFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TipoFunc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TipoFunc, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TipoFunc, new { htmlAttributes = new { @class = "campo" } })
+                    @Html.ValidationMessageFor(model => model.TipoFunc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        </main>
+    </main>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Ver Funcionários", "listarFuncionario", "Funcionario")
+            <input type="submit" value="Editar" class="buttonEdit" />
         </div>
     </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</section>

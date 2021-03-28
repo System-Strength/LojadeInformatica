@@ -25,7 +25,7 @@ Layout = null;
 
         body {
             min-height: 100vh;
-            background-image: linear-gradient(to bottom, #282c18 0%, black 100%);
+            background-image: linear-gradient(to top, #0d0d0d 0%, black 100%);
             transition: 2s;
         }
 
@@ -71,10 +71,10 @@ Layout = null;
         }
 
             .main_one p {
-                font: bold 4em Poppins;
+                font: bold 3.8em Poppins;
                 color: var(--white);
                 height: 45vh;
-                letter-spacing: 3px;
+                letter-spacing: 3.5px;
             }
 
         .sliders img {
@@ -98,10 +98,14 @@ Layout = null;
     <nav>
         <ul>
             <a href="" title="Home"><li class="home"><img src="~/fonts/icons/home_icon.png" alt=""></li></a>
-            <a href="../Funcionario/cadFuncionario" title="Cadastrar Funcionário"><li><img src="~/fonts/icons/add-func_icon.png" alt=""></li></a>
+            <!--SE FUNCIONÁRIO LOGAR NÃO IRÁ APARECER O ÍCONE NA NAVBAR DE CADASTRAR FUNCIONÁRIO-->
+            @if (Session["tipoLogado1"] == null) 
+            {
+                <a href="../Funcionario/cadFuncionario" title="Cadastrar Funcionário"><li><img src="~/fonts/icons/add-func_icon.png" alt=""></li></a>
+            }
             <a href="../Funcionario/cadCliente" title="Cadastrar Cliente"><li><img src="~/fonts/icons/add-cliente_icon.png" alt=""></li></a>
             <a href="../Funcionario/cadProduto" title="Produtos"><li><img src="~/fonts/icons/cube_icon.png" alt=""></li></a>
-            <a href="" title="Carrinho"><li><img src="~/fonts/icons/shopping-cart_icon.png" alt=""></li></a>
+            <a href="../Funcionario/Venda" title="Carrinho"><li><img src="~/fonts/icons/shopping-cart_icon.png" alt=""></li></a>
             <a href="../Login/Login" title="Sair"><li class="log-out"><img src="~/fonts/icons/log-out_icon.png" alt=""></li></a>
         </ul>
     </nav>
@@ -111,8 +115,8 @@ Layout = null;
         </main>
         <main class="main_two">
             <div class="sliders">
-                <img class="selected" src="~/fonts/sliders/Keybord_slider.png">
-                <img class="img_two" src="~/fonts/sliders/Mouse_slider.png">
+                <img class="selected" src="~/fonts/sliders/Mouse_slider.png">
+                <img class="img_two" src="~/fonts/sliders/Keybord_slider.png">
                 <img class="img_theree" src="~/fonts/sliders/Fone_slider.png">
                 <img class="img_four" src="~/fonts/sliders/Notebook_slider.png">
                 <img class="img_five" src="~/fonts/sliders/Memoria_slider.png">
@@ -121,8 +125,7 @@ Layout = null;
         </main>
     </section>
 </body>
-<script>
-    let time = 3000,
+<script>let time = 3000,
     currentImageWeb = 0,
     currentBacktWeb = 0,
     images = document.querySelectorAll(".sliders img")
@@ -130,9 +133,6 @@ Layout = null;
 
     function nextImage(){
         images[currentImageWeb].classList.remove("selected")
-        var back = document.querySelectorAll(".back");
-
-
 
         currentImageWeb++
 
@@ -142,10 +142,10 @@ Layout = null;
         images[currentImageWeb].classList.add("selected")
 
         switch(currentImageWeb){
-            case 0:  document.body.style.cssText = "background-image: linear-gradient(to top, #282c18 0%, black 100%);"
+            case 0: document.body.style.cssText = "background-image: linear-gradient(to top, #0d0d0d 0%, black 100%);"
             break;
 
-            case 1: document.body.style.cssText = "background-image: linear-gradient(to bottom, #434343 0%, black 100%);"
+            case 1: document.body.style.cssText = "background-image: linear-gradient(to bottom, #444444 0%, black 100%);"
             break;
 
             case 2:  document.body.style.cssText = "background-image: linear-gradient(to top, #2D3C42 0%, black 100%);"
@@ -167,6 +167,5 @@ Layout = null;
             nextImage();
         }, time)
     }
-    window.addEventListener("load", startImage)
-</script>
+    window.addEventListener("load", startImage)</script>
 </html>

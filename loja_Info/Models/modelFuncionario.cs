@@ -8,6 +8,8 @@ namespace loja_Info.Models
 {
     public class modelFuncionario
     {
+        //DADOS QUE VEM DO BANCO
+
         [DisplayName("Código:")]
         public string CodFunc { get; set; }
 

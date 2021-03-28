@@ -11,14 +11,14 @@ namespace loja_Info.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index()//view da página inicial 
         {
             return View();
         }
 
         acoesLogin acoes = new acoesLogin();
 
-        public ActionResult Login()
+        public ActionResult Login() //view do login
         {
             return View();
         }
@@ -42,7 +42,7 @@ namespace loja_Info.Controllers
                 if (funcionario.TipoFunc == "0") // caso tipo 0 é gerente;
                 {
                     Session["tipoLogado0"] = funcionario.TipoFunc.ToString(); //=1;
-                    return RedirectToAction("cadFuncionario", "Funcionario");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

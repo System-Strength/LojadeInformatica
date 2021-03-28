@@ -8,6 +8,8 @@ namespace loja_Info.Models
 {
     public class modelProduto
     {
+        //DADOS QUE VEM DO BANCO
+
         [DisplayName("Código:")]
         public string cod_Prod { get; set; }
 

@@ -1,43 +1,103 @@
 ﻿
 @model loja_Info.Models.modelFuncionario
 
+@{ Layout = null;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+}
+
+<style>
+    * {
+        font-family: sans-serif;
+    }
+
+    .a {
+        /* topo | direita | inferior | esquerda */
+        margin: 7% 0 0 22em;
+        border: solid 1.5px;
+        border-color: rgb(163, 163, 163);
+        background-color: white;
+        /* superior | direita | inferior | esquerda */
+        padding: 10px 0 0 0;
+        width: 50%;
+        height: 60vh;
+        display: block;
+        justify-content: center;
+    }
+
+    BODY {
+        background-color: #E8E8E8;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 37px;
+    }
+
+    .campo {
+        /* topo | direita | inferior | esquerda */
+        margin: 6% 0 0.2em 6.5em;
+        /* tipo | tamanho | cor */
+        border: solid 1.9px rgb(163, 163, 163);
+        display: flex;
+        font: italic 16pt sans-serif;
+        text-align: center;
+        width: 30vw;
+        height: 8vh;
+        color: black;
+    }
+
+        .campo::placeholder {
+            text-align: center;
+        }
+
+    .buttonEntrar {
+        /* topo | direita | inferior | esquerda */
+        margin: 7% 0 0 12.5em;
+        background-color: rgb(0, 204, 255);
+        text-align: center;
+        justify-content: center;
+        width: 30%;
+        color: white;
+        /* style | tamanho | font */
+        font: bold 14pt sans-serif;
+        border: none;
+        /* superior | direita | inferior | esquerda */
+        padding: 20px;
+        cursor: pointer;
+    }
+</style>
+
 @ViewBag.msgLogar
+
+
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
-    <fieldset>
-        <br />
-        <h2>Entrar</h2>
-        <br />
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i style="font-size:20px;" class="fa fa-envelope"></i></span>
+<br />
+<div class="a">
+    <div class="form-group">
+        <h1>LOGIN</h1>
+        <div class="input-group">
+            <span class="input-group-addon"><i style="font-size:20%; color:red;" class="fa fa-envelope"></i></span>
+            @Html.EditorFor(x => x.RgFunc, new { htmlAttributes = new { id = "txtUsuario", senha = "txtUsuario", type = "text", @class = "campo", placeholder = "Digite o usuário", required = "required", maxlength = "30" }})
+            <img src="~/fonts/icons/user.png" style="width:2.5%; position: absolute; margin: -3.7% 13%; opacity:40%;" alt="Img">
+            @Html.ValidationMessageFor(x => x.RgFunc, "", new { @class = "text-danger" })
 
-                @Html.EditorFor(x => x.RgFunc, new
-           {
-               htmlAttributes = new { id = "txtUsuario", senha = "txtUsuario", type = "text", @class = "form-control", placeholder = "Digite o usuário", required = "required", maxlength = "30" }
-           })
-
-                @Html.ValidationMessageFor(x => x.RgFunc, "", new { @class = "text-danger" })
-
-            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i style="font-size:20px;" class="fa fa-lock"></i></span>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i style="font-size:20px;" class="fa fa-lock"></i></span>
 
-                @Html.EditorFor(x => x.SenhaFunc, new
-           {
-               htmlAttributes = new { id = "txtSenha", senha = "txtSenha", type = "password", @class = "form-control", placeholder = "Digite sua senha", required = "required", maxlength = "10" }
-           })
+            @Html.EditorFor(x => x.SenhaFunc, new { htmlAttributes = new { id = "txtSenha", senha = "txtSenha", type = "password", @class = "campo", placeholder = "Digite sua senha", required = "required", maxlength = "10" } })
+            <img src="~/fonts/icons/padlock.png" style="width:2.5%; position: absolute; margin: -3.6% 13%; opacity:40%;" alt="Img">
+            @Html.ValidationMessageFor(x => x.SenhaFunc, "", new { @class = "text-danger" })
 
-                @Html.ValidationMessageFor(x => x.SenhaFunc, "", new { @class = "text-danger" })
-
-            </div>
         </div>
+    </div>
 
-        <input type="submit" class="button button-a button-big button-rouded" value="ENTRAR"><br />
-        <br />
+    <input type="submit" class="buttonEntrar" value="ENTRAR"><br />
+    <br />
 
-    </fieldset>
-}
+</div>
+    }

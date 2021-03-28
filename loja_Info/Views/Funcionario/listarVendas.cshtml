@@ -1,9 +1,10 @@
-﻿@model IEnumerable<loja_Info.Models.modelFuncionario>
+﻿@model IEnumerable<loja_Info.Models.modelVenda>
 
-    @{ ViewBag.Title = "listarFuncionario";
-                Layout = null;
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />  }
-
+    @{
+    ViewBag.Title = "listarVendas";
+    Layout = null;
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+    }
     <style>
         * {
             margin: 0;
@@ -59,9 +60,9 @@
 
         section {
             background-color: var(--white);
-            width: 96vw;
+            width: 95vw;
             height: 70vh;
-            margin: 5% 15%;
+            margin: 5% 17%;
             padding: 25px;
             border: solid 2px var(--text);
             justify-content: center;
@@ -69,14 +70,14 @@
 
             section h1 {
                 font: bold 22pt Poppins;
-                margin: 3% 22%;
+                margin: 1% 28%;
                 width: 70%;
                 letter-spacing: 3px;
                 color: var(--text);
             }
 
         table {
-            padding: 25px;
+            padding: 30px;
             background: #fff;
         }
 
@@ -104,72 +105,62 @@
             <a href="../Login/Login" title="Sair"><li class="log-out"><img src="~/fonts/icons/log-out_icon.png" alt=""></li></a>
         </ul>
     </nav>
+
     <body>
         <section>
-            <h1>FUNCIONÁRIOS CADASTRADOS</h1>
+            <h1>VENDAS REALIZADAS</h1>
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CodFunc)
+                        @Html.DisplayNameFor(model => model.cod_Vendas)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.NomeFunc)
+                        @Html.DisplayNameFor(model => model.nome_Cli)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.RgFunc)
+                        @Html.DisplayNameFor(model => model.endereco_Cli)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CargoFunc)
+                        @Html.DisplayNameFor(model => model.cel_Cli)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.EndFunc)
+                        @Html.DisplayNameFor(model => model.nome_Prod)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CelFunc)
+                        @Html.DisplayNameFor(model => model.qtd_Prod)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.SenhaFunc)
+                        @Html.DisplayNameFor(model => model.forma_Pagamento)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TipoFunc)
-                    </th>
-                    <th>Opções </th>
+
                 </tr>
 
                 @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CodFunc)
+                        @Html.DisplayFor(modelItem => item.cod_Vendas)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NomeFunc)
+                        @Html.DisplayFor(modelItem => item.nome_Cli)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RgFunc)
+                        @Html.DisplayFor(modelItem => item.endereco_Cli)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CargoFunc)
+                        @Html.DisplayFor(modelItem => item.cel_Cli)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EndFunc)
+                        @Html.DisplayFor(modelItem => item.nome_Prod)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CelFunc)
+                        @Html.DisplayFor(modelItem => item.qtd_Prod)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SenhaFunc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoFunc)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "editarFuncionario", new { id = item.CodFunc }) |
-                        @Html.ActionLink("Deletar", "excluirFuncionario", new { id = item.CodFunc }, new { onclick = "return confirm('Deseja realmente excluir?');" })
+                        @Html.DisplayFor(modelItem => item.forma_Pagamento)
                     </td>
                 </tr>
-}
+            }
             </table>
         </section>
     </body>
-
